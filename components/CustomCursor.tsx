@@ -1,85 +1,136 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+
+interface Particle {
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+  sides: number;
+  alpha: number;
+  velocity: { x: number; y: number };
+}
 
 export default function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [trail, setTrail] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-  const [isHidden, setIsHidden] = useState(true);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const mouseRef = useRef({ x: 0, y: 0, active: false });
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setIsHidden(false);
-      setPosition({ x: e.clientX, y: e.clientY });
-    };
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    // Smooth delay for the hacker trailing effect
     let animationFrameId: number;
-    const updateTrail = () => {
-      setTrail((prev) => {
-        const dx = position.x - prev.x;
-        const dy = position.y - prev.y;
-        return {
-          x: prev.x + dx * 0.15, // Smooth interpolation factor
-          y: prev.y + dy * 0.15,
-        };
-      });
-      animationFrameId = requestAnimationFrame(updateTrail);
-    };
-    animationFrameId = requestAnimationFrame(updateTrail);
+    let particles: Particle[] = [];
+    
+    // Theme colors matching image_9e7da5.jpg
+    const colors = [
+      'rgba(249, 115, 22, ',  // Bright Orange (#f97316)
+      'rgba(38, 38, 38, ',    // Dark Charcoal Polygon
+      'rgba(64, 64, 64, ',    // Medium Charcoal
+      'rgba(47, 63, 67, '     // Slate-Teal Muted Bubbles
+    ];
 
-    // Hover triggers on interactive elements
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName === 'A' || 
-        target.tagName === 'BUTTON' || 
-        target.closest('a') || 
-        target.closest('button') ||
-        target.classList.contains('group')
-      ) {
-        setIsHovered(true);
-      } else {
-        setIsHovered(false);
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const createParticle = (x: number, y: number) => {
+      const size = Math.random() * 35 + 8; // Varied polygon and bubble shapes
+      const colorTemplate = colors[Math.floor(Math.random() * colors.length)];
+      const sides = Math.random() > 0.4 ? Math.floor(Math.random() * 3) + 4 : 0; // 0 means clean circle, others are polygons
+      
+      particles.push({
+        x,
+        y,
+        size,
+        color: colorTemplate,
+        sides,
+        alpha: 0.8,
+        velocity: {
+          x: (Math.random() - 0.5) * 1.5,
+          y: (Math.random() - 0.5) * 1.5
+        }
+      });
+    };
+
+    const drawPolygon = (context: CanvasRenderingContext2D, x: number, y: number, radius: number, sides: number) => {
+      context.beginPath();
+      context.moveTo(x + radius * Math.cos(0), y + radius * Math.sin(0));
+      for (let i = 1; i <= sides; i++) {
+        context.lineTo(x + radius * Math.cos((i * 2 * Math.PI) / sides), y + radius * Math.sin((i * 2 * Math.PI) / sides));
+      }
+      context.closePath();
+      context.fill();
+    };
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Create new items continually on slow moves or drags
+      if (mouseRef.current.active && Math.random() > 0.2) {
+        createParticle(mouseRef.current.x, mouseRef.current.y);
+      }
+
+      // Cap array constraints to maintain stable framerates
+      if (particles.length > 120) {
+        particles.shift();
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.velocity.x;
+        p.y += p.velocity.y;
+        p.alpha -= 0.006; // Slow decay rate to let nodes settle like the snapshot
+
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.fillStyle = `${p.color}${p.alpha})`;
+
+        if (p.sides === 0) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          drawPolygon(ctx, p.x, p.y, p.size, p.sides);
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+    animate();
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current.x = e.clientX;
+      mouseRef.current.y = e.clientY;
+      mouseRef.current.active = true;
+      
+      // Spawn burst items dynamically on motion trigger
+      for (let i = 0; i < 2; i++) {
+        createParticle(e.clientX, e.clientY);
       }
     };
 
-    const handleMouseLeave = () => setIsHidden(true);
-
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
+      window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseover', handleMouseOver);
-      document.removeEventListener('mouseleave', handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [position.x, position.y]);
-
-  if (isHidden) return null;
+  }, []);
 
   return (
-    <>
-      {/* Core Dot (Immediate feedback) */}
-      <div
-        className="hidden md:block fixed top-0 left-0 w-2 h-2 bg-cyan-400 rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 shadow-[0_0_8px_#22d3ee] mix-blend-screen transition-transform duration-100 ease-out"
-        style={{ left: `${position.x}px`, top: `${position.y}px`, transform: `translate(-50%, -50%) scale(${isHovered ? 1.5 : 1})` }}
-      />
-
-      {/* Outer Cyberpunk Ring Trail */}
-      <div
-        className="hidden md:block fixed top-0 left-0 w-8 h-8 border border-purple-500 rounded-full pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2 mix-blend-screen transition-all duration-300 ease-out"
-        style={{
-          left: `${trail.x}px`,
-          top: `${trail.y}px`,
-          transform: `translate(-50%, -50%) scale(${isHovered ? 1.8 : 1})`,
-          borderColor: isHovered ? '#22d3ee' : '#a855f7',
-          boxShadow: isHovered ? '0 0 15px rgba(34, 211, 238, 0.4)' : '0 0 10px rgba(168, 85, 247, 0.2)',
-          backgroundColor: isHovered ? 'rgba(34, 211, 238, 0.05)' : 'transparent'
-        }}
-      />
-    </>
+    <canvas
+      ref={canvasRef}
+      className="hidden md:block fixed inset-0 pointer-events-none z-[40] w-full h-full mix-blend-screen"
+    />
   );
 }
