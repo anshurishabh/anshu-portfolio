@@ -1,34 +1,19 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 
-const skillCategories = [
-  {
-    title: "SYSTEM_LANGUAGES // CORE",
-    skills: [
-      { name: "Java_Runtime", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
-      { name: "Python_Core", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-      { name: "C_Compiler", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
-      { name: "SQL_DB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-      { name: "TS_Compiler", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" }
-    ]
-  },
-  {
-    title: "WEB_ENGINES // RUNTIMES",
-    skills: [
-      { name: "Next.JS_15", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-      { name: "React_V19", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-      { name: "Node_Server", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-      { name: "Tailwind_CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" }
-    ]
-  },
-  {
-    title: "INTELLIGENCE_MODULES // AI",
-    skills: [
-      { name: "XGBoost_ML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
-      { name: "Gemini_API", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" },
-      { name: "Git_Version", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" }
-    ]
-  }
+const allSkills = [
+  { name: "Java_Runtime", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+  { name: "Python_Core", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+  { name: "C_Compiler", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+  { name: "SQL_DB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+  { name: "TS_Compiler", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+  { name: "Next.JS_15", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+  { name: "React_V19", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "Node_Server", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "Tailwind_CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+  { name: "XGBoost_ML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
+  { name: "Gemini_API", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" },
+  { name: "Git_Version", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" }
 ];
 
 export default function Skills() {
@@ -36,63 +21,114 @@ export default function Skills() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <section id="skills" className="py-20 relative bg-[#010003]">
+    <section id="skills" className="py-20 relative bg-[#010003] overflow-hidden">
       
-      {/* Structural Global Animations Style Injection */}
+      {/* Heavy CSS Inject Engine for Infinity Vertical Marquee */}
       <style jsx global>{`
-        @keyframes cyberSpin3D {
-          0% { transform: perspective(400px) rotateY(0deg); }
-          100% { transform: perspective(400px) rotateY(360deg); }
+        @keyframes verticalMarqueeUp {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
         }
-        .animate-cyber-3d {
-          animation: cyberSpin3D 8s linear infinite;
-          transform-style: preserve-3d;
+        @keyframes verticalMarqueeDown {
+          0% { transform: translateY(-50%); }
+          100% { transform: translateY(0); }
         }
-        .group:hover .animate-cyber-3d {
+        .animate-marquee-up {
+          animation: verticalMarqueeUp 25s linear infinite;
+        }
+        .animate-marquee-down {
+          animation: verticalMarqueeDown 25s linear infinite;
+        }
+        .marquee-container:hover .animate-marquee-up,
+        .marquee-container:hover .animate-marquee-down {
           animation-play-state: paused;
-          transform: perspective(400px) rotateY(0deg) scale(1.1);
-          transition: transform 0.4s ease-out;
         }
       `}</style>
 
-      <div className="space-y-4 text-center mb-20 font-mono">
+      <div className="space-y-4 text-center mb-16 font-mono">
         <h2 className="text-3xl sm:text-4xl font-black bg-gradient-to-r from-cyan-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent inline-block">
-          [ TECHNICAL_EXPERTISE ]
+          [ CORE_TECH_MATRIX ]
         </h2>
         <p className="text-purple-400 max-w-2xl mx-auto text-xs tracking-wider uppercase animate-pulse">
-          &gt; Scanning compiled environments and operational modules...
+          &gt; Streamlining architecture nodes into parallel vertical tracks...
         </p>
       </div>
 
-      <div className="space-y-14 max-w-6xl mx-auto px-4">
-        {skillCategories.map((category, idx) => (
-          <div key={idx} className="space-y-6 font-mono">
-            <div className="flex items-center gap-2 border-b border-purple-500/10 pb-2">
-              <span className="text-cyan-400 animate-ping text-xs">●</span>
-              <h3 className="text-sm font-bold tracking-widest text-white">{category.title}</h3>
-            </div>
+      {/* Main Structural Wrapper for Columns */}
+      <div className="max-w-5xl mx-auto px-4 marquee-container grid grid-cols-2 sm:grid-cols-3 gap-8 h-[550px] relative overflow-hidden rounded-lg border border-purple-500/10 bg-black/20 p-6 backdrop-blur-sm">
+        
+        {/* Ambient Neon Top & Bottom Fade Overlays */}
+        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#010003] to-transparent z-20 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#010003] to-transparent z-20 pointer-events-none" />
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {category.skills.map((skill, sIdx) => (
-                <div key={sIdx} className="group relative border border-purple-500/20 bg-purple-950/5 p-5 flex flex-col items-center justify-center text-center gap-3 transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] rounded-md overflow-hidden">
-                  
-                  {/* The 3D Rotating Logo Frame */}
-                  <div className="w-14 h-14 border border-purple-500/10 p-2.5 flex items-center justify-center bg-black/40 group-hover:border-cyan-400 transition-all duration-300 relative rounded animate-cyber-3d">
-                    <img 
-                      src={skill.icon} 
-                      alt={skill.name} 
-                      className={`w-full h-full object-contain backface-visible ${skill.name.includes("Next") ? "invert" : ""}`} 
-                    />
-                  </div>
-
-                  <span className="text-[11px] font-bold tracking-wider text-gray-400 group-hover:text-cyan-400 transition-colors duration-200">
-                    {skill.name}
-                  </span>
+        {/* 📈 COLUMN 1: Upward Endless Stream */}
+        <div className="flex flex-col overflow-hidden relative border-r border-purple-500/5 pr-4">
+          <div className="space-y-6 animate-marquee-up flex flex-col">
+            {[...allSkills, ...allSkills].map((skill, sIdx) => (
+              <div key={`up-${sIdx}`} className="group relative border border-purple-500/20 bg-purple-950/5 p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] rounded-md">
+                
+                {/* Ultra Sized 3D Scaled Logo Container */}
+                <div className="w-20 h-20 border border-purple-500/10 p-3 flex items-center justify-center bg-black/50 rounded-md group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-md">
+                  <img 
+                    src={skill.icon} 
+                    alt={skill.name} 
+                    className={`w-full h-full object-contain ${skill.name.includes("Next") ? "invert" : ""}`} 
+                  />
                 </div>
-              ))}
-            </div>
+
+                <span className="text-[12px] font-mono font-bold tracking-widest text-gray-400 group-hover:text-cyan-400 transition-colors duration-200">
+                  {skill.name.toUpperCase()}
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* 📉 COLUMN 2: Downward Endless Stream */}
+        <div className="flex flex-col overflow-hidden relative border-r border-purple-500/5 px-2">
+          <div className="space-y-6 animate-marquee-down flex flex-col">
+            {[...allSkills.reverse(), ...allSkills].map((skill, sIdx) => (
+              <div key={`down-${sIdx}`} className="group relative border border-cyan-500/10 bg-cyan-950/5 p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 hover:border-purple-500 hover:shadow-[0_0_25px_rgba(168,85,247,0.25)] rounded-md">
+                
+                {/* Ultra Sized 3D Scaled Logo Container */}
+                <div className="w-20 h-20 border border-cyan-500/10 p-3 flex items-center justify-center bg-black/50 rounded-md group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300 shadow-md">
+                  <img 
+                    src={skill.icon} 
+                    alt={skill.name} 
+                    className={`w-full h-full object-contain ${skill.name.includes("Next") ? "invert" : ""}`} 
+                  />
+                </div>
+
+                <span className="text-[12px] font-mono font-bold tracking-widest text-gray-400 group-hover:text-purple-400 transition-colors duration-200">
+                  {skill.name.toUpperCase()}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 📈 COLUMN 3: Upward Endless Stream (Hidden on super small phones, beautiful on desktops) */}
+        <div className="hidden sm:flex flex-col overflow-hidden relative pl-4">
+          <div className="space-y-6 animate-marquee-up flex flex-col">
+            {[...allSkills, ...allSkills].map((skill, sIdx) => (
+              <div key={`up2-${sIdx}`} className="group relative border border-purple-500/20 bg-purple-950/5 p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] rounded-md">
+                
+                <div className="w-20 h-20 border border-purple-500/10 p-3 flex items-center justify-center bg-black/50 rounded-md group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-md">
+                  <img 
+                    src={skill.icon} 
+                    alt={skill.name} 
+                    className={`w-full h-full object-contain ${skill.name.includes("Next") ? "invert" : ""}`} 
+                  />
+                </div>
+
+                <span className="text-[12px] font-mono font-bold tracking-widest text-gray-400 group-hover:text-cyan-400 transition-colors duration-200">
+                  {skill.name.toUpperCase()}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );
