@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Terminal } from 'lucide-react'; // Kept only verified core packages
+import { Terminal } from 'lucide-react'; 
 import TiltCard from '@/components/TiltCard'; 
 
 const projectsList = [
@@ -9,16 +9,16 @@ const projectsList = [
     subtitle: "Microfinance Risk Analytics Infrastructure",
     description: "An advanced, high-performance hybrid loan risk prediction system architected specifically for microfinance institutions. The engine executes heavy hyperparameter-optimized XGBoost mathematical models alongside deep neural learning logic to process credit scores. It dynamically links with custom Google Gemini API automated pipelines to generate real-time, comprehensive qualitative risk profiling diagnostics and cross-verify borrower authenticity.",
     tags: ["Python Core", "XGBoost", "Google Gemini API", "Next.js 15", "MongoDB"],
-    image: "/project-credo.jpg", 
+    image: "/credo-1.png", // Direct mapping to your uploaded asset
     gitLink: "https://github.com/anshurishabh",
     liveLink: "#"
   },
   {
-    title: "NODE_CLUSTER // ADVANCED_CYBER_CORE",
-    subtitle: "High-Performance Interactive Environment",
-    description: "A production-grade, asynchronous single-page deployment environment engineered using server-side structural layer injection. The platform integrates a zero-lag GPU-accelerated canvas graphics matrix mapping coordinate telemetry dynamically beneath the pointer tip. Built with optimization algorithms to manage active visual buffers, custom multi-tone Web Audio API sound pipelines, and fully sandboxed background diagnostics consoles.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Web Audio API", "Node.js"],
-    image: "/project-portfolio.jpg", 
+    title: "DRIVER DROWNER CORE // COMPUTER_VISION",
+    subtitle: "Real-Time Neural Detection Pipeline",
+    description: "A production-grade computer vision safety architecture engineered to monitor operator awareness thresholds in real-time. The platform utilizes facial landmark mapping and neural telemetry clusters to track dynamic visual fatigue vectors. Features instantaneous multi-tone reactive hazard warnings and fully integrated asynchronous operational logging grids.",
+    tags: ["Python", "OpenCV", "Machine Learning", "Neural Networks"],
+    image: "/drowsiness.png", // Direct mapping to your uploaded asset
     gitLink: "https://github.com/anshurishabh",
     liveLink: "#"
   }
@@ -42,13 +42,13 @@ export default function Projects() {
             <div className="group relative rounded-md border border-purple-500/20 bg-black/50 hover:border-cyan-400 transition-all duration-300 flex flex-col justify-between h-full overflow-hidden shadow-[0_0_30px_rgba(168,85,247,0.02)] hover:shadow-[0_0_35px_rgba(34,211,238,0.15)]">
               
               <div>
-                {/* Image Grid Frame */}
+                {/* Image Frame Grid matching corporate tech wireframes */}
                 <div className="relative w-full h-48 sm:h-56 bg-zinc-950 border-b border-white/5 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-70" />
                   <img 
                     src={proj.image} 
                     alt={proj.title} 
-                    className="w-full h-full object-cover opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700 grayscale group-hover:grayscale-0" 
+                    className="w-full h-full object-cover opacity-60 group-hover:opacity-95 group-hover:scale-102 transition-all duration-700 grayscale group-hover:grayscale-0" 
                   />
                   
                   <div className="absolute top-3 left-3 z-20 px-2 py-0.5 rounded bg-black/80 border border-cyan-500/30 text-[9px] text-cyan-400 font-bold uppercase tracking-widest">
@@ -56,7 +56,7 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Main Description Logic */}
+                {/* Main Details Structure */}
                 <div className="p-6 space-y-4">
                   <div className="flex items-start justify-between border-b border-white/5 pb-3 gap-4">
                     <div className="space-y-0.5">
@@ -71,7 +71,6 @@ export default function Projects() {
                       </p>
                     </div>
 
-                    {/* Highly Secure Pure HTML Vector SVGs */}
                     <div className="flex items-center gap-2 shrink-0">
                       <a 
                         href={proj.gitLink} 
