@@ -37,6 +37,24 @@ export default function Skills() {
 
   return (
     <section id="skills" className="py-20 relative bg-[#010003]">
+      
+      {/* Structural Global Animations Style Injection */}
+      <style jsx global>{`
+        @keyframes cyberSpin3D {
+          0% { transform: perspective(400px) rotateY(0deg); }
+          100% { transform: perspective(400px) rotateY(360deg); }
+        }
+        .animate-cyber-3d {
+          animation: cyberSpin3D 8s linear infinite;
+          transform-style: preserve-3d;
+        }
+        .group:hover .animate-cyber-3d {
+          animation-play-state: paused;
+          transform: perspective(400px) rotateY(0deg) scale(1.1);
+          transition: transform 0.4s ease-out;
+        }
+      `}</style>
+
       <div className="space-y-4 text-center mb-20 font-mono">
         <h2 className="text-3xl sm:text-4xl font-black bg-gradient-to-r from-cyan-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent inline-block">
           [ TECHNICAL_EXPERTISE ]
@@ -46,7 +64,7 @@ export default function Skills() {
         </p>
       </div>
 
-      <div className="space-y-14 max-w-6xl mx-auto">
+      <div className="space-y-14 max-w-6xl mx-auto px-4">
         {skillCategories.map((category, idx) => (
           <div key={idx} className="space-y-6 font-mono">
             <div className="flex items-center gap-2 border-b border-purple-500/10 pb-2">
@@ -56,10 +74,17 @@ export default function Skills() {
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {category.skills.map((skill, sIdx) => (
-                <div key={sIdx} className="group relative border border-purple-500/20 bg-purple-950/5 p-5 flex flex-col items-center justify-center text-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] rounded-md">
-                  <div className="w-12 h-12 border border-purple-500/10 p-2 flex items-center justify-center bg-black/40 group-hover:border-cyan-400 transition-all duration-300 relative">
-                    <img src={skill.icon} alt={skill.name} className={`w-full h-full object-contain ${skill.name.includes("Next") ? "invert" : ""}`} />
+                <div key={sIdx} className="group relative border border-purple-500/20 bg-purple-950/5 p-5 flex flex-col items-center justify-center text-center gap-3 transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] rounded-md overflow-hidden">
+                  
+                  {/* The 3D Rotating Logo Frame */}
+                  <div className="w-14 h-14 border border-purple-500/10 p-2.5 flex items-center justify-center bg-black/40 group-hover:border-cyan-400 transition-all duration-300 relative rounded animate-cyber-3d">
+                    <img 
+                      src={skill.icon} 
+                      alt={skill.name} 
+                      className={`w-full h-full object-contain backface-visible ${skill.name.includes("Next") ? "invert" : ""}`} 
+                    />
                   </div>
+
                   <span className="text-[11px] font-bold tracking-wider text-gray-400 group-hover:text-cyan-400 transition-colors duration-200">
                     {skill.name}
                   </span>
