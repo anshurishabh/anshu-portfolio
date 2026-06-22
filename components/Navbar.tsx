@@ -1,124 +1,66 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Terminal } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Certificates", href: "#certificates" }, // Smooth scroll integration
-    { name: "Contact", href: "#contact" }
+    { name: "// ABOUT", href: "#about" },
+    { name: "// SKILLS", href: "#skills" },
+    { name: "// PROJECTS", href: "#projects" },
+    { name: "// CERTIFICATES", href: "#certificates" },
+    { name: "// CONTACT", href: "#contact" }
   ];
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
       scrolled 
-        ? 'bg-[#030014]/80 backdrop-blur-md border-white/5 py-4' 
+        ? 'bg-[#02000a]/90 backdrop-blur-md border-purple-500/20 py-3 shadow-[0_0_20px_rgba(168,85,247,0.1)]' 
         : 'bg-transparent border-transparent py-5'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Desktop Layout Matrix - Matching image_963ac7.png */}
         <div className="hidden md:grid grid-cols-3 items-center w-full">
           
-          {/* Left Column: Social Text Anchors */}
-          <div className="flex items-center space-x-6 justify-start text-xs font-medium tracking-wide">
-            <a 
-              href="https://github.com/anshurishabh" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-gray-400 hover:text-white transition-colors duration-200"
-            >
-              GitHub
+          <div className="flex items-center space-x-6 justify-start text-[11px] font-mono tracking-widest">
+            <a href="https://github.com/anshurishabh" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-cyan-400 transition-colors duration-300 flex items-center gap-1">
+              <span className="text-cyan-500">&gt;</span> GITHUB
             </a>
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-gray-400 hover:text-white transition-colors duration-200"
-            >
-              LinkedIn
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-cyan-400 transition-colors duration-300 flex items-center gap-1">
+              <span className="text-cyan-500">&gt;</span> LINKEDIN
             </a>
           </div>
 
-          {/* Center Column: Highlighted Brand Title */}
           <div className="flex justify-center">
-            <a href="#" className="text-xl font-black tracking-wider text-purple-400 drop-shadow-[0_0_15px_rgba(168,85,247,0.15)]">
-              ANSHU.DEV
+            <a href="#" className="text-xl font-black tracking-widest text-cyan-400 font-mono filter drop-shadow-[0_0_8px_rgba(34,211,238,0.5)] animate-pulse">
+              ANSHU<span className="text-purple-500">_CORE.EXE</span>
             </a>
           </div>
 
-          {/* Right Column: Menu Links Group */}
-          <div className="flex items-center space-x-6 lg:space-x-8 justify-end text-sm font-medium">
+          <div className="flex items-center space-x-6 justify-end text-xs font-mono tracking-wider">
             {navLinks.map((link, idx) => (
-              <a 
-                key={idx} 
-                href={link.href} 
-                className="text-gray-400 hover:text-white transition-colors duration-200 text-xs lg:text-sm whitespace-nowrap"
-              >
+              <a key={idx} href={link.href} className="text-gray-400 hover:text-cyan-400 transition-all duration-200 relative group py-1">
                 {link.name}
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-cyan-400 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 shadow-[0_0_8px_#22d3ee]" />
               </a>
             ))}
           </div>
-
         </div>
 
-        {/* Mobile View Container - Clean Minimal Support */}
         <div className="flex md:hidden items-center justify-between w-full">
-          <a href="#" className="text-lg font-black tracking-wider text-purple-400">
-            ANSHU.DEV
-          </a>
-          <button 
-            onClick={() => setIsOpen(!isOpen)} 
-            className="text-gray-400 hover:text-white focus:outline-none"
-          >
+          <a href="#" className="text-lg font-mono font-bold text-cyan-400">ANSHU_CORE</a>
+          <button onClick={() => setIsOpen(!isOpen)} className="text-cyan-400 focus:outline-none">
             {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
-
       </div>
-
-      {/* Mobile Sidebar Dropdown Expansion */}
-      {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#030014]/95 border-b border-white/5 backdrop-blur-lg">
-          <div className="px-4 pt-2 pb-6 space-y-4 flex flex-col">
-            {navLinks.map((link, idx) => (
-              <a 
-                key={idx} 
-                href={link.href} 
-                onClick={() => setIsOpen(false)}
-                className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="flex items-center space-x-6 pt-4 border-t border-white/5 text-xs">
-              <a href="https://github.com/anshurishabh" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-                GitHub
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-                LinkedIn
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }
