@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
-import { Terminal, Cpu, ArrowUpRight, Github } from 'lucide-react';
-import TiltCard from '@/components/TiltCard'; // Core 3D engine linked
+import { Terminal, ArrowUpRight } from 'lucide-react'; // Removed Github import to fix build error
+import TiltCard from '@/components/TiltCard'; 
 
 const projectsList = [
   {
@@ -34,7 +34,6 @@ export default function Projects() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
         {projectsList.map((proj, idx) => (
-          /* Wrapped in TiltCard engine for advanced spatial 3D angle transforms */
           <TiltCard key={idx} className="w-full">
             <div className="group relative p-6 rounded-md border border-purple-500/20 bg-black/40 hover:border-cyan-400 transition-all duration-300 flex flex-col justify-between h-full shadow-[inset_0_0_15px_rgba(168,85,247,0.02)]">
               
@@ -47,9 +46,19 @@ export default function Projects() {
                     </h3>
                   </div>
                   <div className="flex items-center gap-2">
-                    <a href={proj.gitLink} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded bg-purple-950/20 border border-purple-500/30 text-purple-400 hover:text-white hover:border-purple-400 transition-all">
-                      <Github size={12} />
+                    
+                    {/* Native Hardware SVGs for GitHub - 100% immune to export errors */}
+                    <a 
+                      href={proj.gitLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-1.5 rounded bg-purple-950/20 border border-purple-500/30 text-purple-400 hover:text-white hover:border-purple-400 transition-all"
+                    >
+                      <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
                     </a>
+
                     <a href={proj.liveLink} className="p-1.5 rounded bg-cyan-950/20 border border-cyan-500/30 text-cyan-400 hover:text-white hover:border-cyan-400 transition-all">
                       <ArrowUpRight size={12} />
                     </a>
