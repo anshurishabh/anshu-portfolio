@@ -6,13 +6,16 @@ import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
 import Certificates from '@/components/Certificates';
 import Contact from '@/components/Contact';
+import CustomCursor from '@/components/CustomCursor'; // <-- Imported New Cursor Module
 
 export default function Home() {
   return (
-    // Explicit global dark theme shell forcing absolute layouts
-    <main className="min-h-screen bg-[#030014] text-white selection:bg-purple-500/30 selection:text-purple-200 overflow-x-hidden relative">
+    <main className="min-h-screen bg-[#020005] text-white selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden relative md:cursor-none">
       
-      {/* Absolute Header Inject Layer - Forcing top-most priority view */}
+      {/* Injected Custom Laser Trailing Grid Cursor */}
+      <CustomCursor />
+
+      {/* Absolute Header Inject Layer */}
       <div className="relative z-50">
         <Navbar />
       </div>
@@ -24,21 +27,14 @@ export default function Home() {
         <div className="absolute top-[60%] left-[-30%] w-[700px] h-[700px] rounded-full bg-indigo-900/5 blur-[160px]" />
       </div>
 
-      {/* Main Framework Content Grid Container */}
+      {/* Main Content Grid Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4 pt-12">
-        
         <Hero />
-        
         <About />
-        
         <Skills />
-        
         <Projects />
-        
         <Certificates /> 
-        
         <Contact />
-        
       </div>
     </main>
   );
