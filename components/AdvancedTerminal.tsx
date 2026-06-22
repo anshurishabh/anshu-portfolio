@@ -32,7 +32,13 @@ export default function AdvancedTerminal() {
   }, []);
 
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // FIXED: Ab ye sirf internal console box ke text ko update karega, full browser screen ko move nahi karega!
+    if (terminalEndRef.current) {
+      const parent = terminalEndRef.current.parentElement;
+      if (parent) {
+        parent.scrollTop = parent.scrollHeight;
+      }
+    }
   }, [logs]);
 
   return (
@@ -47,7 +53,9 @@ export default function AdvancedTerminal() {
           <span className="flex items-center gap-1"><Shield size={10} className="text-purple-500" /> STABLE</span>
         </div>
       </div>
-      <div className="space-y-1 h-28 overflow-y-auto pr-2 scrollbar-none">
+      
+      {/* Scrollbar-none tracking locked internally here */}
+      <div className="space-y-1 h-28 overflow-y-auto pr-2 scrollbar-none scroll-smooth">
         {logs.map((log, idx) => (
           <div key={idx} className="flex gap-2 items-start">
             <span className="text-purple-500 select-none">[{new Date().toLocaleTimeString()}]</span>
