@@ -8,28 +8,29 @@ interface Particle {
   color: string;
   sides: number;
   alpha: number;
-  velocity: { x: number; y: number };
+  vx: number;
+  vy: number;
 }
 
 export default function CustomCursor() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const mouseRef = useRef({ x: 0, y: 0, active: false });
+  const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let animationFrameId: number;
     let particles: Particle[] = [];
     
-    // Theme colors matching image_9e7da5.jpg
+    // Exact colors matching image_9e7da5.jpg matrix
     const colors = [
-      'rgba(249, 115, 22, ',  // Bright Orange (#f97316)
-      'rgba(38, 38, 38, ',    // Dark Charcoal Polygon
-      'rgba(64, 64, 64, ',    // Medium Charcoal
-      'rgba(47, 63, 67, '     // Slate-Teal Muted Bubbles
+      'rgba(249, 115, 22, ',  // Instant Orange
+      'rgba(38, 38, 38, ',    // Dark Charcoal Block
+      'rgba(64, 64, 64, ',    // Mid Charcoal
+      'rgba(47, 63, 67, '     // Muted Slate Node
     ];
 
     const resizeCanvas = () => {
@@ -40,9 +41,9 @@ export default function CustomCursor() {
     resizeCanvas();
 
     const createParticle = (x: number, y: number) => {
-      const size = Math.random() * 35 + 8; // Varied polygon and bubble shapes
+      const size = Math.random() * 25 + 6; // Compact high-performance sizing
       const colorTemplate = colors[Math.floor(Math.random() * colors.length)];
-      const sides = Math.random() > 0.4 ? Math.floor(Math.random() * 3) + 4 : 0; // 0 means clean circle, others are polygons
+      const sides = Math.random() > 0.4 ? Math.floor(Math.random() * 3) + 4 : 0; 
       
       particles.push({
         x,
@@ -50,11 +51,10 @@ export default function CustomCursor() {
         size,
         color: colorTemplate,
         sides,
-        alpha: 0.8,
-        velocity: {
-          x: (Math.random() - 0.5) * 1.5,
-          y: (Math.random() - 0.5) * 1.5
-        }
+        alpha: 0.9,
+        // High blast speed for quick explosion feedback
+        vx: (Math.random() - 0.5) * 4,
+        vy: (Math.random() - 0.5) * 4
       });
     };
 
@@ -71,21 +71,16 @@ export default function CustomCursor() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Create new items continually on slow moves or drags
-      if (mouseRef.current.active && Math.random() > 0.2) {
-        createParticle(mouseRef.current.x, mouseRef.current.y);
-      }
-
-      // Cap array constraints to maintain stable framerates
-      if (particles.length > 120) {
-        particles.shift();
+      // Force render matrix limits
+      if (particles.length > 70) {
+        particles.splice(0, particles.length - 70);
       }
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
-        p.x += p.velocity.x;
-        p.y += p.velocity.y;
-        p.alpha -= 0.006; // Slow decay rate to let nodes settle like the snapshot
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= 0.025; // Super fast fade-out to prevent lagging trail
 
         if (p.alpha <= 0) {
           particles.splice(i, 1);
@@ -108,17 +103,16 @@ export default function CustomCursor() {
     animate();
 
     const handleMouseMove = (e: MouseEvent) => {
+      // Direct raw screen input update without any lerp interpolation lag
       mouseRef.current.x = e.clientX;
       mouseRef.current.y = e.clientY;
-      mouseRef.current.active = true;
       
-      // Spawn burst items dynamically on motion trigger
-      for (let i = 0; i < 2; i++) {
-        createParticle(e.clientX, e.clientY);
-      }
+      // Instantly generate bursts exactly underneath the pointer tip
+      createParticle(e.clientX, e.clientY);
+      createParticle(e.clientX, e.clientY);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
@@ -130,7 +124,7 @@ export default function CustomCursor() {
   return (
     <canvas
       ref={canvasRef}
-      className="hidden md:block fixed inset-0 pointer-events-none z-[40] w-full h-full mix-blend-screen"
+      className="hidden md:block fixed inset-0 pointer-events-none z-[9999] w-full h-full mix-blend-screen"
     />
   );
 }
