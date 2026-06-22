@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Terminal, ArrowUpRight, ShieldAlert, Cpu } from 'lucide-react'; 
+import { Terminal } from 'lucide-react'; // Kept only verified core packages
 import TiltCard from '@/components/TiltCard'; 
 
 const projectsList = [
@@ -9,7 +9,7 @@ const projectsList = [
     subtitle: "Microfinance Risk Analytics Infrastructure",
     description: "An advanced, high-performance hybrid loan risk prediction system architected specifically for microfinance institutions. The engine executes heavy hyperparameter-optimized XGBoost mathematical models alongside deep neural learning logic to process credit scores. It dynamically links with custom Google Gemini API automated pipelines to generate real-time, comprehensive qualitative risk profiling diagnostics and cross-verify borrower authenticity.",
     tags: ["Python Core", "XGBoost", "Google Gemini API", "Next.js 15", "MongoDB"],
-    image: "/project-credo.jpg", // Make sure to place your image in public/ folder
+    image: "/project-credo.jpg", 
     gitLink: "https://github.com/anshurishabh",
     liveLink: "#"
   },
@@ -18,7 +18,7 @@ const projectsList = [
     subtitle: "High-Performance Interactive Environment",
     description: "A production-grade, asynchronous single-page deployment environment engineered using server-side structural layer injection. The platform integrates a zero-lag GPU-accelerated canvas graphics matrix mapping coordinate telemetry dynamically beneath the pointer tip. Built with optimization algorithms to manage active visual buffers, custom multi-tone Web Audio API sound pipelines, and fully sandboxed background diagnostics consoles.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Web Audio API", "Node.js"],
-    image: "/project-portfolio.jpg", // Make sure to place your image in public/ folder
+    image: "/project-portfolio.jpg", 
     gitLink: "https://github.com/anshurishabh",
     liveLink: "#"
   }
@@ -38,13 +38,11 @@ export default function Projects() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto px-4 sm:px-6">
         {projectsList.map((proj, idx) => (
-          /* Locked inside 3D Tilt Axis framework */
           <TiltCard key={idx} className="w-full">
             <div className="group relative rounded-md border border-purple-500/20 bg-black/50 hover:border-cyan-400 transition-all duration-300 flex flex-col justify-between h-full overflow-hidden shadow-[0_0_30px_rgba(168,85,247,0.02)] hover:shadow-[0_0_35px_rgba(34,211,238,0.15)]">
               
-              {/* Internal layout block */}
               <div>
-                {/* Image Section Container */}
+                {/* Image Grid Frame */}
                 <div className="relative w-full h-48 sm:h-56 bg-zinc-950 border-b border-white/5 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-80" />
                   <img 
@@ -53,18 +51,17 @@ export default function Projects() {
                     className="w-full h-full object-cover opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700 grayscale group-hover:grayscale-0" 
                   />
                   
-                  {/* Absolute Corner Blueprint Tag */}
                   <div className="absolute top-3 left-3 z-20 px-2 py-0.5 rounded bg-black/80 border border-cyan-500/30 text-[9px] text-cyan-400 font-bold uppercase tracking-widest">
                     SYS_BUILD_V1.0.{idx}
                   </div>
                 </div>
 
-                {/* Content Details Block */}
+                {/* Main Description Logic */}
                 <div className="p-6 space-y-4">
                   <div className="flex items-start justify-between border-b border-white/5 pb-3 gap-4">
                     <div className="space-y-0.5">
                       <div className="flex items-center gap-2 text-cyan-400">
-                        <Terminal size={14} className="animate-pulse text-cyan-400" />
+                        <Terminal size={14} className="text-cyan-400" />
                         <h3 className="text-sm font-black tracking-wider text-white group-hover:text-cyan-400 transition-colors">
                           {proj.title}
                         </h3>
@@ -74,7 +71,7 @@ export default function Projects() {
                       </p>
                     </div>
 
-                    {/* Action Links */}
+                    {/* Highly Secure Pure HTML Vector SVGs */}
                     <div className="flex items-center gap-2 shrink-0">
                       <a 
                         href={proj.gitLink} 
@@ -90,7 +87,6 @@ export default function Projects() {
                         href={proj.liveLink} 
                         className="p-1.5 rounded bg-cyan-950/20 border border-cyan-500/30 text-cyan-400 hover:text-white hover:border-cyan-400 transition-all shadow-[inset_0_0_8px_rgba(34,211,238,0.1)]"
                       >
-                        <arrowupright size={12} />
                         <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg">
                           <line x1="7" y1="17" x2="17" y2="7"></line>
                           <polyline points="7 7 17 7 17 17"></polyline>
@@ -99,18 +95,16 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* Complete Restored In-Depth Description */}
                   <p className="text-gray-400 text-xs leading-relaxed font-sans font-medium text-justify">
                     {proj.description}
                   </p>
                 </div>
               </div>
 
-              {/* Tag System footer metrics */}
               <div className="px-6 pb-6 pt-3 border-t border-white/5 mt-auto bg-black/20">
                 <div className="flex flex-wrap gap-1.5">
                   {proj.tags.map((tg, tIdx) => (
-                    <span key={tIdx} className="px-2.5 py-0.5 rounded bg-purple-950/40 border border-purple-500/20 text-[9px] text-purple-300 font-semibold tracking-wider uppercase shadow-[inset_0_0_4px_rgba(168,85,247,0.05)]">
+                    <span key={tIdx} className="px-2.5 py-0.5 rounded bg-purple-950/40 border border-purple-500/20 text-[9px] text-purple-300 font-semibold tracking-wider uppercase">
                       {tg}
                     </span>
                   ))}
