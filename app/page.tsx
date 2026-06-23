@@ -11,7 +11,8 @@ import CustomCursor from '@/components/CustomCursor';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#020005] text-white selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden relative md:cursor-none">
+    /* FIXED: Removed 'md:cursor-none' from the main className to make your native mouse cursor visible again */
+    <main className="min-h-screen bg-[#020005] text-white selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden relative">
       
       <CustomCursor />
 
