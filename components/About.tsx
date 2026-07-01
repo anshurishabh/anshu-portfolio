@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { Code2, Brain, Terminal, GraduationCap } from 'lucide-react';
+import GitHubCalendar from 'react-github-calendar';
+import { Code2, Brain, Terminal, GraduationCap, User } from 'lucide-react';
 
 const educationTimeline = [
   {
@@ -42,8 +43,16 @@ export default function About() {
     setIsVisible(true);
   }, []);
 
+  // Custom green matrix layout for the contribution node streams
+  const cyberTheme = {
+    light: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+    dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+  };
+
   return (
-    <section id="about" className="py-20 relative">
+    <section id="about" className="py-20 relative font-mono">
+      
+      {/* 🔴 MODULE 1: SECTION HEADER */}
       <div className="space-y-4 text-center mb-16">
         <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent inline-block">
           About & Education
@@ -53,6 +62,7 @@ export default function About() {
         </p>
       </div>
 
+      {/* 🔴 MODULE 2: SPLIT MATRIX GRID (CARDS + TIMELINE) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         
         {/* Left Side: Short & Sharp Professional Focus Cards */}
@@ -172,6 +182,49 @@ export default function About() {
         </div>
 
       </div>
+
+      {/* 🔴 MODULE 3: GITHUB CONTRIBUTIONS CORE DASHBOARD (NEW INJECTION POINT) */}
+      <div className={`mt-16 border border-white/5 bg-white/[0.01] p-6 rounded-2xl backdrop-blur-md hover:border-purple-500/20 transition-all duration-500 w-full overflow-hidden ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}>
+        
+        {/* Wireframe Heading Controls */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-4 mb-6">
+          <div className="space-y-1">
+            <h3 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
+              <Terminal size={14} className="text-purple-400 animate-pulse" /> 
+              // GIT_ENGINE_CONTRIBUTIONS
+            </h3>
+            <p className="text-[10px] text-gray-500 tracking-wider">
+              REAL-TIME SOURCE CODE SUBMISSIONS AND VERSION CONTROL MATRIX
+            </p>
+          </div>
+          <a 
+            href="https://github.com/anshurishabh" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="px-3 py-1 rounded-md border border-purple-500/20 bg-purple-950/10 text-purple-300 text-[10px] font-bold tracking-wider hover:bg-purple-900/20 hover:border-purple-400 transition-all text-center self-start sm:self-center font-mono"
+          >
+            SOURCE_NODE →
+          </a>
+        </div>
+
+        {/* Calendar Graph Canvas Layer */}
+        <div className="w-full overflow-x-auto pt-2 flex justify-center scrollbar-thin scrollbar-thumb-zinc-800">
+          <div className="min-w-[760px] text-gray-400 font-sans text-xs">
+            <GitHubCalendar 
+              username="anshurishabh"
+              blockSize={12}
+              blockMargin={4}
+              fontSize={11}
+              theme={cyberTheme}
+              hideColorLegend={false}
+            />
+          </div>
+        </div>
+
+      </div>
+
     </section>
   );
 }
