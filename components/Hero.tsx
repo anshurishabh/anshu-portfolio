@@ -69,9 +69,9 @@ export default function Hero() {
               <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-[8px] font-black text-black bg-cyan-400 rounded-full animate-bounce">1</span>
             </a>
 
-            {/* FIXED & FULLY UPDATED: New Tab Preview + Automated PDF Download Target */}
+            {/* FIXED & UPDATED: Direct target to Anshu_resume.pdf */}
             <a 
-              href="/resume.pdf" 
+              href="/Anshu_resume.pdf" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="px-5 py-2.5 rounded-full border border-cyan-500/40 bg-cyan-950/20 text-cyan-400 text-xs font-bold tracking-wider hover:bg-cyan-950/40 hover:border-cyan-400 transition-all flex items-center gap-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
