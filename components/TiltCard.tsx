@@ -24,6 +24,7 @@ export default function TiltCard({ children, className = "" }: { children: React
   // Safe sound feedback generator using standard Web Audio API
   const playCyberClick = () => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();

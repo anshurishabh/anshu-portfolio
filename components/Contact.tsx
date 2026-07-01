@@ -9,10 +9,10 @@ export default function Contact() {
         <div className="absolute -right-20 -bottom-20 w-60 h-60 bg-blue-500/10 rounded-full blur-[80px] pointer-events-none" />
         
         <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent inline-block mb-4">
-          Let's Build Something Impactful
+          Let&apos;s Build Something Impactful
         </h2>
         <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base mb-8">
-          I am currently exploring technical internship and full-time software engineering roles. If you have an opening that matches my skill set, let's connect.
+          I am currently exploring technical internship and full-time software engineering roles. If you have an opening that matches my skill set, let&apos;s connect.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

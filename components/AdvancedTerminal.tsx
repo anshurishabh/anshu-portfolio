@@ -15,7 +15,7 @@ export default function AdvancedTerminal() {
       "MODULE: Hacker components compiled natively via Next.js 15"
     ];
 
-    setLogs([systemEvents[0], systemEvents[1]]);
+    const rafId = requestAnimationFrame(() => setLogs([systemEvents[0], systemEvents[1]]));
 
     const interval = setInterval(() => {
       const randomTrigger = [
@@ -28,7 +28,10 @@ export default function AdvancedTerminal() {
       setLogs(prev => [...prev.slice(-4), nextLog]); // Keep last 5 entries
     }, 4000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   useEffect(() => {

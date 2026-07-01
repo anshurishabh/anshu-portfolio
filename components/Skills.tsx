@@ -33,10 +33,14 @@ const skillCategoriesVertical = [
 
 export default function Skills() {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const playHackerPing = () => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
@@ -101,7 +105,7 @@ export default function Skills() {
             <div className="w-full text-center border-b border-cyan-500/10 pb-2 relative group">
               <span className="absolute left-0 text-cyan-500 text-[10px] tracking-widest opacity-40">SYS_MOD_0{catIdx+1}</span>
               <h3 className="text-xs font-bold tracking-[0.25em] text-purple-400 uppercase drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]">
-                // {category.title}
+                {`// ${category.title}`}
               </h3>
               <span className="absolute right-0 text-cyan-500 text-[10px] tracking-widest opacity-40">READY</span>
             </div>

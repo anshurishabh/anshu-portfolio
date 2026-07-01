@@ -1,14 +1,12 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import type { Props as GitHubCalendarProps } from 'react-github-calendar';
 import { Code2, Brain, Terminal, GraduationCap } from 'lucide-react';
 
-// 🔍 FIXED: Load GitHubCalendar dynamically with SSR disabled to pass strict Next.js/Turbopack ESM compilations
-const GitHubCalendarComponent = dynamic(
-  () => import('react-github-calendar').then((mod) => {
-    // Handle both default and named export variations based on module specifications
-    return mod.default || (mod as any).GitHubCalendar || mod;
-  }),
+// Load GitHubCalendar dynamically with SSR disabled, using its named export and typed props
+const GitHubCalendarComponent = dynamic<GitHubCalendarProps>(
+  () => import('react-github-calendar').then((mod) => mod.GitHubCalendar),
   { ssr: false }
 );
 
@@ -49,7 +47,8 @@ export default function About() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
+    const id = requestAnimationFrame(() => setIsVisible(true));
+    return () => cancelAnimationFrame(id);
   }, []);
 
   // Custom green matrix layout for the contribution node streams
@@ -187,7 +186,7 @@ export default function About() {
           <div className="space-y-1">
             <h3 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
               <Terminal size={14} className="text-purple-400 animate-pulse" /> 
-              // GIT_ENGINE_CONTRIBUTIONS
+              GIT_ENGINE_CONTRIBUTIONS
             </h3>
             <p className="text-[10px] text-gray-500 tracking-wider">
               REAL-TIME SOURCE CODE SUBMISSIONS AND VERSION CONTROL MATRIX
@@ -213,7 +212,7 @@ export default function About() {
               blockMargin={4}
               fontSize={11}
               theme={cyberTheme}
-              hideColorLegend={false}
+              showColorLegend={false}
             />
           </div>
         </div>
