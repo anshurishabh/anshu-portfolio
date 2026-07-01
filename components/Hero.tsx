@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Terminal, FileText, Code2, MessagesSquare, FolderGit2 } from 'lucide-react';
+import { Terminal, FileText, MessagesSquare, FolderGit2 } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -98,10 +98,10 @@ export default function Hero() {
           <div className="w-[280px] sm:w-[320px] h-[360px] sm:h-[400px] rounded-3xl p-1 border border-purple-500/20 bg-gradient-to-b from-purple-950/10 to-black overflow-hidden relative shadow-[0_0_40px_rgba(168,85,247,0.05)] group hover:border-cyan-400/40 transition-colors duration-500">
             <div className="absolute inset-0 bg-gradient-to-t from-[#020005] via-transparent to-transparent z-10 opacity-60" />
             
-            {/* The Professional Image Asset */}
+            {/* The Professional Image Asset [UPDATED PATH & REMOVED NAME REF] */}
             <img 
-              src="/project-portfolio.jpg" // Put your profile pic inside public/ and change this name if needed
-              alt="Anshu Kumar Rishabh Profile"
+              src="/profile.jpg" 
+              alt="System Operator Profile Architecture"
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-102"
             />
 
@@ -114,7 +114,7 @@ export default function Hero() {
           {/* Bottom Floating Profile Identity Box (LinkedIn Capsule) */}
           <div className="mt-6 w-full max-w-[280px] sm:max-w-[320px]">
             <a 
-              href="https://linkedin.com/in/anshurishabh" // Enter your custom handle here
+              href="https://linkedin.com/in/anshurishabh" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="w-full py-2.5 rounded-full bg-zinc-950 border border-cyan-500/10 flex items-center justify-center gap-2 hover:border-cyan-400/50 hover:bg-cyan-950/10 transition-all text-[11px] font-mono tracking-widest text-cyan-400/80 hover:text-cyan-400"
