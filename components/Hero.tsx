@@ -32,10 +32,10 @@ export default function Hero() {
           {/* High-End Tech Asymmetric Title Grid */}
           <div className="space-y-1">
             <h1 className="text-5xl sm:text-7xl font-black tracking-tight text-white leading-none">
-              Anshu
+              Anshu Kumar
             </h1>
             <h1 className="text-5xl sm:text-7xl font-black tracking-tight bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent leading-none">
-              Kumar
+              Rishabh
             </h1>
             <div className="text-[10px] text-gray-500 tracking-[0.4em] uppercase pt-4 font-bold">
               FULL-STACK • ML • DEVELOPER
