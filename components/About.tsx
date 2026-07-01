@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import GitHubCalendar from 'react-github-calendar';
-import { Code2, Brain, Terminal, GraduationCap, User } from 'lucide-react';
+import { Code2, Brain, Terminal, GraduationCap } from 'lucide-react';
 
 const educationTimeline = [
   {
@@ -101,22 +101,7 @@ export default function About() {
               </p>
             </div>
           </div>
-
-          {/* Engineering Mindset Card */}
-          <div className="glass-card p-6 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:border-indigo-500/20 transition-all duration-300">
-            <div className="p-3 bg-indigo-500/10 text-indigo-400 rounded-xl w-fit mb-4">
-              <Terminal size={22} />
-            </div>
-            <h3 className="text-lg font-bold text-white mb-2">Engineering Mindset</h3>
-            <div className="text-gray-400 text-xs sm:text-sm space-y-2 leading-relaxed">
-              <p>
-                <strong>Concept:</strong> Writing optimized code, utilizing proper data structures, and handling robust production logic.
-              </p>
-              <p>
-                <strong>Tech & Stack:</strong> Applying solid algorithms using <strong>Java</strong> and <strong>Python</strong>, managing clean modular repository systems via <strong>Git</strong>, and ensuring fast server-side query runtime and performance scaling.
-              </p>
-            </div>
-          </div>
+          
         </div>
 
         {/* Right Side: Structured & Matching Academic Timeline */}
@@ -183,7 +168,7 @@ export default function About() {
 
       </div>
 
-      {/* 🔴 MODULE 3: GITHUB CONTRIBUTIONS CORE DASHBOARD (NEW INJECTION POINT) */}
+      {/* 🔴 MODULE 3: GITHUB CONTRIBUTIONS CORE DASHBOARD */}
       <div className={`mt-16 border border-white/5 bg-white/[0.01] p-6 rounded-2xl backdrop-blur-md hover:border-purple-500/20 transition-all duration-500 w-full overflow-hidden ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}>
