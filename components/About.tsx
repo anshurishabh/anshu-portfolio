@@ -1,7 +1,16 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import GitHubCalendar from 'react-github-calendar';
+import dynamic from 'next/dynamic';
 import { Code2, Brain, Terminal, GraduationCap } from 'lucide-react';
+
+// 🔍 FIXED: Load GitHubCalendar dynamically with SSR disabled to pass strict Next.js/Turbopack ESM compilations
+const GitHubCalendarComponent = dynamic(
+  () => import('react-github-calendar').then((mod) => {
+    // Handle both default and named export variations based on module specifications
+    return mod.default || (mod as any).GitHubCalendar || mod;
+  }),
+  { ssr: false }
+);
 
 const educationTimeline = [
   {
@@ -197,7 +206,8 @@ export default function About() {
         {/* Calendar Graph Canvas Layer */}
         <div className="w-full overflow-x-auto pt-2 flex justify-center scrollbar-thin scrollbar-thumb-zinc-800">
           <div className="min-w-[760px] text-gray-400 font-sans text-xs">
-            <GitHubCalendar 
+            {/* Using the dynamically initialized SSR-Safe component wrapper */}
+            <GitHubCalendarComponent 
               username="anshurishabh"
               blockSize={12}
               blockMargin={4}
