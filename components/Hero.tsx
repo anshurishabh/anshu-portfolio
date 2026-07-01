@@ -69,7 +69,13 @@ export default function Hero() {
               <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-[8px] font-black text-black bg-cyan-400 rounded-full animate-bounce">1</span>
             </a>
 
-            <a href="#contact" className="px-5 py-2.5 rounded-full border border-cyan-500/40 bg-cyan-950/20 text-cyan-400 text-xs font-bold tracking-wider hover:bg-cyan-950/40 hover:border-cyan-400 transition-all flex items-center gap-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+            {/* FIXED & FULLY UPDATED: New Tab Preview + Automated PDF Download Target */}
+            <a 
+              href="/resume.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="px-5 py-2.5 rounded-full border border-cyan-500/40 bg-cyan-950/20 text-cyan-400 text-xs font-bold tracking-wider hover:bg-cyan-950/40 hover:border-cyan-400 transition-all flex items-center gap-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
+            >
               <FileText size={14} />
               Resume & CV
             </a>
@@ -98,7 +104,7 @@ export default function Hero() {
           <div className="w-[280px] sm:w-[320px] h-[360px] sm:h-[400px] rounded-3xl p-1 border border-purple-500/20 bg-gradient-to-b from-purple-950/10 to-black overflow-hidden relative shadow-[0_0_40px_rgba(168,85,247,0.05)] group hover:border-cyan-400/40 transition-colors duration-500">
             <div className="absolute inset-0 bg-gradient-to-t from-[#020005] via-transparent to-transparent z-10 opacity-60" />
             
-            {/* The Professional Image Asset [UPDATED PATH & REMOVED NAME REF] */}
+            {/* The Professional Image Asset */}
             <img 
               src="/profile.jpg" 
               alt="System Operator Profile Architecture"
