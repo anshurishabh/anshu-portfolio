@@ -22,10 +22,10 @@ export default function Hero() {
           <div className="flex flex-wrap gap-2 items-center">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-[9px] tracking-[0.15em] uppercase font-bold">
               <span className="w-1 h-1 rounded-full bg-cyan-400 block animate-ping" />
-              OPEN_TO_WORK
+              OPEN TO WORK
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-purple-500/20 bg-purple-500/5 text-purple-400 text-[9px] tracking-[0.15em] uppercase font-bold">
-              FULL_STACK_DEV
+              FULL STACK DEV
             </span>
           </div>
 
@@ -38,7 +38,7 @@ export default function Hero() {
               Rishabh
             </h1>
             <div className="text-[10px] text-gray-500 tracking-[0.4em] uppercase pt-4 font-bold">
-              FULL-STACK • ML • DEVELOPER
+              FULL-STACK • ML • DS-AI • DEVELOPER
             </div>
           </div>
 

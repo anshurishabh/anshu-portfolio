@@ -57,35 +57,35 @@ const techStackMatrix = [
   {
     category: "Languages & Runtime Core",
     icon: <Binary size={24} className="text-cyan-400" />,
-    status: "SYSTEM_READY",
+    status: "SYSTEM READY",
     desc: "Core computational baselines utilized to engineer scalable backend algorithms, structural machine learning logic, and clean object-oriented code blocks.",
     tools: ["Java", "Python", "SQL", "JavaScript", "TypeScript"]
   },
   {
     category: "Backend Architecture & DB Nodes",
     icon: <Database size={24} className="text-purple-400" />,
-    status: "STABLE_DATA_FLOW",
+    status: "STABLE DATA FLOW",
     desc: "Production-grade frameworks deployed to manage secure non-blocking operations, structured transactional query boundaries, and gradient boosting logic matrices.",
     tools: ["Node.js", "Express", "MongoDB", "MongoDB Compass", "XGBoost Framework"]
   },
   {
     category: "Advanced AI Toolchains & Inference",
     icon: <Cpu size={24} className="text-amber-400" />,
-    status: "MODEL_INF_ACTIVE",
+    status: "MODEL INF ACTIVE",
     desc: "Advanced neural networks orchestration pipelines, utilizing high-speed sub-second inference processors and natural language context processors.",
     tools: ["Google Gemini API", "Claude Matrix", "Groq Engine", "Hugging Face", "Kaggle Core", "GitHub Copilot", "Google AI Studio", "ChatGPT Go"]
   },
   {
     category: "Cloud Operations & Infrastructure Nodes",
     icon: <ShieldCheck size={24} className="text-emerald-400" />,
-    status: "CLUSTERS_ONLINE",
+    status: "CLUSTERS ONLINE",
     desc: "Distributed microservices, real-time WebRTC media streams, serverless backends, and decoupled lifecycle networks designed for zero downtime setups.",
     tools: ["Vercel Deploy", "Render Cloud", "Firebase Serverless", "Agora API Cluster", "Google Colab Environment", "Git Lifecycle"]
   },
   {
     category: "Creative Systems & Layout Interfaces",
     icon: <Palette size={24} className="text-pink-400" />,
-    status: "UI_METRICS_OK",
+    status: "UI METRICS OK",
     desc: "Aesthetic modular visual architectures focused on responsive design layouts, cinematic effects, and highly engaging bit-wise layout modifications.",
     tools: ["HTML", "CSS", "Canva Space Layout", "Bit-wise Transitions", "Glowing Outlines"]
   }
@@ -123,7 +123,7 @@ export default function Skills() {
                       {stack.icon}
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest block mb-0.5">ENGINE_NODE_0{idx+1}</span>
+                      <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest block mb-0.5">ENGINE NODE 0{idx+1}</span>
                       <h3 className="text-lg sm:text-xl font-black text-white tracking-tight group-hover:text-cyan-400 transition-colors">
                         {stack.category}
                       </h3>
