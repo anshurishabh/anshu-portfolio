@@ -101,7 +101,7 @@ export default function Skills() {
           [ TECHNICAL SKILLS ]
         </h2>
         <p className="text-gray-500 max-w-2xl mx-auto text-xs sm:text-sm tracking-wider uppercase">
-          &gt; Indexing core competencies, developer frameworks, and operational toolchains
+          &gt; CORE COMPETENCIES AND FRAMEWORKS
         </p>
       </div>
 
