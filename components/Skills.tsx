@@ -1,163 +1,173 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { 
+  Terminal, Cpu, Database, Binary, ShieldCheck, Palette, Activity,
+  Code, Coffee, Braces, Eye, Server, Layers, HelpCircle, 
+  Brain, Network, Cloud, Flame, GitBranch, Monitor, Video, Zap, FileCode
+} from 'lucide-react';
+import TiltCard from '@/components/TiltCard'; // Fully synchronized with your 3D system engine
 
-const skillCategoriesVertical = [
+// Helper function to map exact larger icons to your technical tool strings
+const getToolIcon = (name: string) => {
+  const iconMap: { [key: string]: React.ReactNode } = {
+    // Languages & Runtime Core
+    "Java": <Coffee size={16} className="text-amber-500" />,
+    "Python": <Code size={16} className="text-blue-400" />,
+    "SQL": <Database size={16} className="text-cyan-400" />,
+    "JavaScript": <Braces size={16} className="text-yellow-400" />,
+    "TypeScript": <FileCode size={16} className="text-blue-500" />,
+    
+    // Backend & DB Nodes
+    "Node.js": <Server size={16} className="text-emerald-400" />,
+    "Express": <Layers size={16} className="text-gray-400" />,
+    "MongoDB": <Database size={16} className="text-green-500" />,
+    "MongoDB Compass": <Eye size={16} className="text-green-400" />,
+    "XGBoost Framework": <Zap size={16} className="text-amber-400" />,
+    
+    // Advanced AI Toolchains
+    "Google Gemini API": <Brain size={16} className="text-purple-400 animate-pulse" />,
+    "Claude Matrix": <Cpu size={16} className="text-orange-400" />,
+    "Groq Engine": <Zap size={16} className="text-orange-500" />,
+    "Hugging Face": <Activity size={16} className="text-yellow-500" />,
+    "Kaggle Core": <Network size={16} className="text-blue-400" />,
+    "GitHub Copilot": <Code size={16} className="text-teal-400" />,
+    "Google AI Studio": <Monitor size={16} className="text-blue-500" />,
+    "ChatGPT Go": <Brain size={16} className="text-emerald-500" />,
+    
+    // Cloud Operations
+    "Vercel Deploy": <Cloud size={16} className="text-white" />,
+    "Render Cloud": <Server size={16} className="text-indigo-400" />,
+    "Firebase Serverless": <Flame size={16} className="text-orange-500" />,
+    "Agora API Cluster": <Network size={16} className="text-sky-400" />,
+    "Google Colab Environment": <Monitor size={16} className="text-amber-400" />,
+    "Git Lifecycle": <GitBranch size={16} className="text-red-400" />,
+    
+    // Creative Systems
+    "HTML": <Code size={16} className="text-orange-500" />,
+    "CSS": <FileCode size={16} className="text-blue-400" />,
+    "Canva Space Layout": <Palette size={16} className="text-pink-400" />,
+    "Bit-wise Transitions": <Video size={16} className="text-purple-400" />,
+    "Glowing Outlines": <Palette size={16} className="text-cyan-400" />
+  };
+
+  return iconMap[name] || <HelpCircle size={16} className="text-gray-500" />;
+};
+
+const techStackMatrix = [
   {
-    title: "SYSTEM_LANGUAGES // CORE_LOGIC",
-    skills: [
-      { name: "Java Runtime Engine", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", code: "0x7F0A1" },
-      { name: "Python Core Engine", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", code: "0x7F0B2" },
-      { name: "C++ Native Compiler", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg", code: "0x7F0C3" },
-      { name: "SQL Database Kernel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", code: "0x7F0D4" },
-      { name: "TypeScript Compiler", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", code: "0x7F0E5" }
-    ]
+    category: "Languages & Runtime Core",
+    icon: <Binary size={24} className="text-cyan-400" />,
+    status: "SYSTEM_READY",
+    desc: "Core computational baselines utilized to engineer scalable backend algorithms, structural machine learning logic, and clean object-oriented code blocks.",
+    tools: ["Java", "Python", "SQL", "JavaScript", "TypeScript"]
   },
   {
-    title: "WEB_ENGINES // RUNTIMES_CLUSTER",
-    skills: [
-      { name: "Next.JS Framework V15", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", code: "0x8A10F" },
-      { name: "React Ecosystem V19", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", code: "0x8A11A" },
-      { name: "Node.js Server Runtime", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", code: "0x8A12B" },
-      { name: "Tailwind CSS Style Engine", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", code: "0x8A13C" }
-    ]
+    category: "Backend Architecture & DB Nodes",
+    icon: <Database size={24} className="text-purple-400" />,
+    status: "STABLE_DATA_FLOW",
+    desc: "Production-grade frameworks deployed to manage secure non-blocking operations, structured transactional query boundaries, and gradient boosting logic matrices.",
+    tools: ["Node.js", "Express", "MongoDB", "MongoDB Compass", "XGBoost Framework"]
   },
   {
-    title: "INTELLIGENCE_MODULES // DATA_AI",
-    skills: [
-      { name: "XGBoost Machine Learning", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg", code: "0x9E301" },
-      { name: "Google Gemini Neural API", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg", code: "0x9E312" },
-      { name: "Git Version Architecture", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", code: "0x9E323" }
-    ]
+    category: "Advanced AI Toolchains & Inference",
+    icon: <Cpu size={24} className="text-amber-400" />,
+    status: "MODEL_INF_ACTIVE",
+    desc: "Advanced neural networks orchestration pipelines, utilizing high-speed sub-second inference processors and natural language context processors.",
+    tools: ["Google Gemini API", "Claude Matrix", "Groq Engine", "Hugging Face", "Kaggle Core", "GitHub Copilot", "Google AI Studio", "ChatGPT Go"]
+  },
+  {
+    category: "Cloud Operations & Infrastructure Nodes",
+    icon: <ShieldCheck size={24} className="text-emerald-400" />,
+    status: "CLUSTERS_ONLINE",
+    desc: "Distributed microservices, real-time WebRTC media streams, serverless backends, and decoupled lifecycle networks designed for zero downtime setups.",
+    tools: ["Vercel Deploy", "Render Cloud", "Firebase Serverless", "Agora API Cluster", "Google Colab Environment", "Git Lifecycle"]
+  },
+  {
+    category: "Creative Systems & Layout Interfaces",
+    icon: <Palette size={24} className="text-pink-400" />,
+    status: "UI_METRICS_OK",
+    desc: "Aesthetic modular visual architectures focused on responsive design layouts, cinematic effects, and highly engaging bit-wise layout modifications.",
+    tools: ["HTML", "CSS", "Canva Space Layout", "Bit-wise Transitions", "Glowing Outlines"]
   }
 ];
 
 export default function Skills() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    const id = requestAnimationFrame(() => setMounted(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
-
-  const playHackerPing = () => {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      
-      osc.type = 'square'; // Asymmetric vintage hardware tone
-      osc.frequency.setValueAtTime(880, audioCtx.currentTime); 
-      gain.gain.setValueAtTime(0.006, audioCtx.currentTime); // Low non-intrusive sound
-      gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.04);
-      
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.04);
-    } catch (e) {}
-  };
-
   return (
-    <section id="skills" className="py-24 relative bg-[#020005] font-mono overflow-hidden">
+    <section id="skills" className="py-24 border-t border-white/5 font-mono relative">
       
-      {/* 🟢 Advanced Cyber Laser Scanner and Hologram Animation Styles */}
-      <style jsx global>{`
-        @keyframes cyberScanLine {
-          0% { top: 0%; opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { top: 100%; opacity: 0; }
-        }
-        @keyframes advanced3DOrbit {
-          0% { transform: perspective(500px) rotateY(0deg) rotateX(10deg); }
-          50% { transform: perspective(500px) rotateY(180deg) rotateX(-10deg); }
-          100% { transform: perspective(500px) rotateY(360deg) rotateX(10deg); }
-        }
-        .animate-scan-line {
-          animation: cyberScanLine 2.5s linear infinite;
-        }
-        .animate-hacker-orbit {
-          animation: advanced3DOrbit 12s linear infinite !important;
-          transform-style: preserve-3d;
-        }
-      `}</style>
-
-      {/* Cyber Noise Background Grid Layout */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.02),transparent_70%)] pointer-events-none" />
-
-      {/* Section Header */}
-      <div className="space-y-4 text-center mb-24 relative z-10">
-        <h2 className="text-3xl sm:text-4xl font-black bg-gradient-to-r from-cyan-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent inline-block tracking-widest filter drop-shadow-[0_0_15px_rgba(34,211,238,0.2)]">
-          [ SUBSYSTEM_EXPERTISE_CORE ]
+      {/* Module Title Header */}
+      <div className="space-y-4 text-center mb-20">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 via-purple-500 to-amber-400 bg-clip-text text-transparent inline-block tracking-tight">
+          [ TECHNICAL SKILLS ]
         </h2>
-        <p className="text-cyan-400/70 max-w-2xl mx-auto text-[11px] tracking-widest uppercase">
-          &gt; EXECUTING DEEP LOGIC ANALYSIS ARCHITECTURE ON FIXED VERTICAL ALIGNMENT...
+        <p className="text-gray-500 max-w-2xl mx-auto text-xs sm:text-sm tracking-wider uppercase">
+          &gt; Indexing core competencies, developer frameworks, and operational toolchains
         </p>
       </div>
 
-      {/* Clean Single Vertical Stack Container */}
-      <div className="max-w-xl mx-auto px-4 flex flex-col items-center space-y-24 relative z-10">
-        
-        {skillCategoriesVertical.map((category, catIdx) => (
-          <div key={catIdx} className="w-full flex flex-col items-center space-y-12">
-            
-            {/* Hologram Section Header Line */}
-            <div className="w-full text-center border-b border-cyan-500/10 pb-2 relative group">
-              <span className="absolute left-0 text-cyan-500 text-[10px] tracking-widest opacity-40">SYS_MOD_0{catIdx+1}</span>
-              <h3 className="text-xs font-bold tracking-[0.25em] text-purple-400 uppercase drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]">
-                {`// ${category.title}`}
-              </h3>
-              <span className="absolute right-0 text-cyan-500 text-[10px] tracking-widest opacity-40">READY</span>
-            </div>
-
-            {/* Vertically Aligned Big Icon Lists */}
-            <div className="w-full flex flex-col items-center space-y-14">
-              {category.skills.map((skill, sIdx) => (
-                <div 
-                  key={sIdx} 
-                  onMouseEnter={playHackerPing}
-                  className="flex flex-col items-center justify-center text-center group relative w-full max-w-sm p-4 rounded border border-white/5 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/5 transition-all duration-300 shadow-md"
-                >
-                  
-                  {/* Digital Target Blueprint Corners */}
-                  <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-purple-500/40 group-hover:border-cyan-400" />
-                  <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-purple-500/40 group-hover:border-cyan-400" />
-                  <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-purple-500/40 group-hover:border-cyan-400" />
-                  <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-purple-500/40 group-hover:border-cyan-400" />
-
-                  {/* Laser Moving Target Scan Line */}
-                  <div className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 animate-scan-line pointer-events-none z-20" />
-
-                  {/* 🌌 KING SIZED 3D MATRIX ORBIT BOX (w-24 h-24) */}
-                  <div className="w-24 h-24 border border-purple-500/20 bg-[#04010a] p-4 flex items-center justify-center rounded-sm shadow-[0_0_25px_rgba(168,85,247,0.03)] group-hover:border-cyan-400 group-hover:shadow-[0_0_35px_rgba(34,211,238,0.25)] transition-all duration-300 animate-hacker-orbit relative overflow-hidden">
-                    {/* Embedded micro grid overlay inside logo */}
-                    <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.03)_1px,transparent_1px)] bg-[size:100%_6px] pointer-events-none" />
-                    <img 
-                      src={skill.icon} 
-                      alt={skill.name} 
-                      className={`w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_12px_rgba(34,211,238,0.5)] ${skill.name.includes("Next") ? "invert" : ""}`} 
-                    />
-                  </div>
-
-                  {/* Glitch Vibe Description Rows */}
-                  <div className="mt-4 space-y-1">
-                    <h4 className="text-xs font-black tracking-[0.15em] text-white group-hover:text-cyan-400 transition-colors duration-200 uppercase font-mono">
-                      {skill.name}
-                    </h4>
-                    <div className="flex items-center justify-center gap-2 text-[9px] text-gray-500 font-mono tracking-widest">
-                      <span>HEX: <span className="text-purple-400 font-semibold">{skill.code}</span></span>
-                      <span>•</span>
-                      <span>SYS: <span className="text-emerald-500 font-semibold animate-pulse">ACTIVE_OK</span></span>
+      {/* Large Expanded Multi-Column Dynamic Grid Layout */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 sm:px-6">
+        {techStackMatrix.map((stack, idx) => (
+          <TiltCard key={idx} className="w-full">
+            <div className="group relative p-8 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-cyan-500/30 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between shadow-[0_0_50px_rgba(0,0,0,0.3)]">
+              
+              {/* Internal matrix pulse gradient element */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-purple-500/0 group-hover:from-cyan-500/5 group-hover:to-purple-500/5 transition-all duration-500 pointer-events-none" />
+              
+              <div className="space-y-6 relative z-10">
+                
+                {/* Upper Module Control Bar */}
+                <div className="flex items-center justify-between border-b border-white/5 pb-5">
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center shrink-0 text-gray-400 group-hover:text-cyan-400 group-hover:bg-cyan-500/10 transition-all duration-500">
+                      {stack.icon}
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest block mb-0.5">ENGINE_NODE_0{idx+1}</span>
+                      <h3 className="text-lg sm:text-xl font-black text-white tracking-tight group-hover:text-cyan-400 transition-colors">
+                        {stack.category}
+                      </h3>
                     </div>
                   </div>
 
+                  {/* Real-Time Telemetry Status Tag */}
+                  <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-md border border-white/5 bg-black/50 text-[10px] text-amber-400 font-bold tracking-widest uppercase">
+                    <Activity size={12} className="text-amber-500 animate-pulse" />
+                    {stack.status}
+                  </div>
                 </div>
-              ))}
-            </div>
 
-          </div>
+                {/* Architecture Objective Description */}
+                <p className="text-sm font-sans text-gray-400 leading-relaxed text-justify pt-1">
+                  {stack.desc}
+                </p>
+
+                {/* Sub-node badging arrays - Expanded View with Dynamic Icons */}
+                <div className="space-y-3 pt-3">
+                  <span className="text-[10px] text-gray-500 uppercase tracking-widest font-bold block"></span>
+                  <div className="flex flex-wrap gap-2.5">
+                    {stack.tools.map((tool, tIdx) => (
+                      <span key={tIdx} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-950/80 border border-white/5 text-xs sm:text-sm text-gray-300 font-mono hover:border-purple-500/40 hover:text-white hover:bg-black transition-all duration-300 shadow-sm">
+                        {getToolIcon(tool)}
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Wireframe Lower Matrix Line */}
+              <div className="mt-10 pt-4 border-t border-white/[0.04] flex items-center justify-between text-[10px] text-gray-600 font-bold uppercase tracking-wider">
+                <span></span>
+                <Terminal size={14} className="text-gray-600 group-hover:text-cyan-400 transition-colors" />
+              </div>
+
+            </div>
+          </TiltCard>
         ))}
       </div>
+
     </section>
   );
 }
