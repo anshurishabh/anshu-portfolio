@@ -26,6 +26,14 @@ const projectMatrix = [
     metrics: "CV ENGINE: NEURAL TELEMETRY LAYER ACTIVE",
     tech: ["Python", "OpenCV", "Machine Learning", "Neural Networks"],
     link: "https://github.com/anshurishabh/Detection"
+  },
+  {
+    title: "NEXCHAT AI",
+    subtitle: "Real-Time WebRTC & Socket.IO Communication Core",
+    desc: "A heavy full-stack real-time communication platform built with custom signaling logic. Implements low-latency instant messaging architecture, message state mutations (edit/delete), integrated push notifications, and high-performance peer-to-peer voice/video stream matrices leveraging WebRTC networks and TURN server optimization.",
+    metrics: "COMMS: WEBRTC + SOCKET.IO MATRIX ACTIVE",
+    tech: ["Next.js", "Node.js", "Socket.IO", "WebRTC", "Vercel", "Render"],
+    link: "https://github.com/anshurishabh/chat-ai"
   }
 ];
 
@@ -44,7 +52,7 @@ export default function Projects() {
       </div>
 
       {/* Projects Grid Configuration */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
         {projectMatrix.map((proj, idx) => (
           <div key={idx} className="border border-white/5 bg-white/[0.01] rounded-2xl p-6 relative group hover:border-cyan-500/30 transition-all duration-500 flex flex-col justify-between overflow-hidden">
             
